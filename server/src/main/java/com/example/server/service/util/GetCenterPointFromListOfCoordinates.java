@@ -3,7 +3,6 @@ package com.example.server.service.util;
 import com.example.server.model.GeoCoordinate;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
