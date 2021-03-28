@@ -37,8 +37,6 @@ public class LocalLifeServiceImpl implements LocalLifeService {
             .build();
 
     public JsonObject localLife(String location1, String location2, List<String> keyWords, int pageSize, int pageNum) throws IOException {
-//        String locationParam1 = findLocationParam(location1);
-//        String locationParam2 = findLocationParam(location2);
 
         StringBuilder keyParams = new StringBuilder();
         for(String keyWord : keyWords){
@@ -72,23 +70,4 @@ public class LocalLifeServiceImpl implements LocalLifeService {
         JsonArray jsonArray = jsonObject.getAsJsonArray("tips");
         return jsonArray;
     }
-
-//    private String findLocationParam(String location) throws IOException {
-//        Locations service = retrofit.create(Locations.class);
-//        Response<JsonObject> response = service.getinputtips(key, location).execute();
-//        JsonObject jsonObject = response.body();
-//        return jsonObject.toString();
-//    }
-
-//    private String findMidLocation(String locationParam1, String locationParam2){
-//        String[] location1 = locationParam1.split(",");
-//        String[] location2 = locationParam2.split(",");
-//
-//        float x = Float.valueOf(location1[0]) + (Float.valueOf(location2[0]) - Float.valueOf(location1[0]))/2;
-//        float y = Float.valueOf(location2[1]) + (Float.valueOf(location2[1]) - Float.valueOf(location1[1]))/2;
-//
-//        StringBuilder res = new StringBuilder();
-//        res.append(x).append(",").append(y);
-//        return res.toString();
-//    }
 }
