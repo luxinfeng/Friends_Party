@@ -11,4 +11,4 @@
 - 丰富返回结果，包括各种店铺的评分
 - 支持多个地点取中间点，或者偏向某个地点
 - 支持导航功能 
-- 增加数据源（目前只有高德，后续加入百度和腾讯的数据源）
+- 增加数据源（目前只有[高德](https://developer.amap.com/api/webservice/guide/api/inputtips) ，后续加入[百度](https://lbsyun.baidu.com/index.php?title=webapi/guide/webservice-placeapi) 和[腾讯](https://lbs.qq.com/service/webService/webServiceGuide/webServiceSearch) 的数据源）
