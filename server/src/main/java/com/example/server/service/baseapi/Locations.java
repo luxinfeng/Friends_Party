@@ -1,5 +1,6 @@
 package com.example.server.service.baseapi;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -15,7 +16,7 @@ import retrofit2.http.Query;
 public interface Locations {
 
     @GET("assistant/inputtips")
-    Call<JsonObject> getinputtips(@Query("key") String key,
+    Call<JSONObject> getinputtips(@Query("key") String key,
                                   @Query("keywords") String keyWords);
 
     @GET("geocode/geo")

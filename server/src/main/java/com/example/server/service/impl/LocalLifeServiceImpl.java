@@ -1,17 +1,16 @@
 package com.example.server.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.example.server.model.GeoCoordinate;
 import com.example.server.service.LocalLifeService;
 import com.example.server.service.baseapi.AMap;
 import com.example.server.service.baseapi.Locations;
 import com.example.server.service.util.GetCenterPointFromListOfCoordinates;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Component;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -36,7 +35,7 @@ public class LocalLifeServiceImpl implements LocalLifeService {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    public JsonObject localLife(String location1, String location2, List<String> keyWords, int pageSize, int pageNum) throws IOException {
+    public JSONObject localLife(String location1, String location2, List<String> keyWords, int pageSize, int pageNum) throws IOException {
 
         StringBuilder keyParams = new StringBuilder();
         for(String keyWord : keyWords){
@@ -55,19 +54,27 @@ public class LocalLifeServiceImpl implements LocalLifeService {
         midLocation.append(String.format("%.6f",midGeoCoordinate.getLatitude()))
                 .append(",")
                 .append(String.format("%.6f",midGeoCoordinate.getLongitude()));
-        Response<JsonObject> response = service.getInfoByLocation(key, midLocation.toString(), keyWords.toString()).execute();
+        Response<JSONObject> response = service.getInfoByLocation(key, midLocation.toString(), keyWords.toString()).execute();
          return response.body();
     }
 
     @Override
-    public JsonArray locationParam(String location) throws IOException {
+    public JSONObject locationParam(String location) throws IOException {
+
+
         Locations service = retrofit.create(Locations.class);
-        Response<JsonObject> response = service.getinputtips(key, location).execute();
-        JsonObject jsonObject = response.body();
-        if(!jsonObject.get("status").equals("1")){
+        Response<JSONObject> response = service.getinputtips(key, location).execute();
+        if (!response.isSuccessful()){
             return null;
         }
-        JsonArray jsonArray = jsonObject.getAsJsonArray("tips");
-        return jsonArray;
+
+        JSONObject jsonObject = response.body();
+        if (!"1".equals(jsonObject.getString("status"))) {
+            return null;
+        }
+
+        JSONArray res = jsonObject.getJSONArray("tips");
+        JSONObject similarRes = res.getJSONObject(0);
+        return similarRes;
     }
 }

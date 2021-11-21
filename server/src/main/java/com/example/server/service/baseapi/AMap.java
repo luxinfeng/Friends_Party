@@ -1,5 +1,6 @@
 package com.example.server.service.baseapi;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -17,5 +18,5 @@ public interface AMap {
     Call<JsonObject> getInfoByText(@Query("key") String key, @Query("keywords") String keyWords, @Query("types") String types);
 
     @GET("place/around")
-    Call<JsonObject> getInfoByLocation(@Query("key") String key, @Query("location") String location, @Query("keywords") String keyWords);
+    Call<JSONObject> getInfoByLocation(@Query("key") String key, @Query("location") String location, @Query("keywords") String keyWords);
 }

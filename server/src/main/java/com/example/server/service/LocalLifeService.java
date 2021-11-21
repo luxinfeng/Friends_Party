@@ -1,5 +1,7 @@
 package com.example.server.service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.springframework.stereotype.Component;
@@ -14,11 +16,11 @@ import java.util.List;
 
 @Component
 public interface LocalLifeService {
-    public JsonObject localLife(String location1,
+    public JSONObject localLife(String location1,
                                 String location2,
                                 List<String> keyWords,
                                 int pageSize,
                                 int pageNum) throws IOException;
 
-    public JsonArray locationParam(String location) throws IOException;
+    public JSONObject locationParam(String location) throws IOException;
 }

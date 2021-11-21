@@ -1,5 +1,8 @@
 package com.example.server.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPObject;
 import com.example.server.service.LocalLifeService;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -20,19 +23,19 @@ import java.util.List;
 
 
 @RestController
-public class LocalLife {
+public class LocalLifeController {
 
     @Resource
     LocalLifeService localLifeService;
 
     @ResponseBody
     @GetMapping("/api/getLocalLife")
-    public JsonObject localLife(@RequestParam("location1") String location1,
-                                @RequestParam("location2") String location2,
-                                @RequestParam("keyWords") List<String> keyWords,
-                                @RequestParam("pageSize") int pageSize,
-                                @RequestParam("pageNum") int pageNum) {
-        JsonObject jsonObject = new JsonObject();
+    public JSONObject localLife(@RequestParam("location1") String location1,
+                                 @RequestParam("location2") String location2,
+                                 @RequestParam("keyWords") List<String> keyWords,
+                                 @RequestParam("pageSize") int pageSize,
+                                 @RequestParam("pageNum") int pageNum) {
+        JSONObject jsonObject = new JSONObject();
         try {
             jsonObject = localLifeService.localLife(location1, location2, keyWords, pageSize, pageNum);
         } catch (IOException e) {
@@ -43,8 +46,8 @@ public class LocalLife {
 
     @ResponseBody
     @GetMapping("api/getLocationParam")
-    public JsonArray locationParam(@RequestParam("location") String location){
-        JsonArray jsonObject = new JsonArray();
+    public JSONObject locationParam(@RequestParam("location") String location){
+        JSONObject jsonObject = new JSONObject();
         try {
             jsonObject = localLifeService.locationParam(location);
         } catch (IOException e) {
